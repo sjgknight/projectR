@@ -31,6 +31,10 @@ create_projectR <- function(path, git = FALSE, repo = NULL, languages = c("R"), 
     "*.ini"),
     gitignore_file = paste0(path,"/.gitignore"))
 
+  # setup renv
+  if (renv) {renv::init(project = path)}
+
+  # Create useful directory structure
   data <- file.path(path, "data")
   R <- file.path(path, "R")
   output <- file.path(path, "output")
