@@ -1,0 +1,17 @@
+Package: projectR
+Title: Combines Value of Usethis and Similar Packages for Useful Default Project Structure
+Version: 0.0.0.9000
+Authors@R: 
+    person("Simon", "Knight", , "sjgknight@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-8709-5780"))
+Description: Package enables me to offload my memory by using multiple fantastic helpers largely from `usethis` and `gitignore` for sensible project defaults.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    git2r,
+    gitignore,
+    pacman,
+    usethis,
+    utils
