@@ -8,7 +8,7 @@
 #' @param languages A character vector of languages to include in the gitignore file.
 #' @param renv Logical value indicating whether to initialize an R environment.
 #' @return A message indicating whether the project was created successfully.
-#' @importFrom pacman p_load p_load_gh
+#' @import pacman
 #' @importFrom usethis create_project create_from_github use_git
 #' @importFrom gitignore gi_fetch_templates gi_write_gitignore
 #' @importFrom git2r init remote_add

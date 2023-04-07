@@ -3,6 +3,12 @@ The following was given to chatGPT to create this package. The code needed a fai
 With a single function, and the `usethis::create_package()` function to create the project outline, all that's needed is the `R` code for the function, edits to description/license/readme, and calls to `usethis::use_package("")` and `devtools::check()` and `devtools::build()` to setup basic package. 
 This is useful to know because this package is pretty dumb, but it would be very easy to modify it for whatever purposes you might want. 
 
+Then share with:
+
+* `gitignore::gi_fetch_templates("R", append_gitignore=T)` 
+* `usethis::use_git()` to initiate a git repo and commit
+* `usethis::use_github()` (private = T if you don't want it shared)
+
 ## Details
 
 `projectR::create_projectR`
