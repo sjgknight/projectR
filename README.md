@@ -9,6 +9,13 @@ Then share with:
 * `usethis::use_git()` to initiate a git repo and commit
 * `usethis::use_github()` (private = T if you don't want it shared)
 
+## Other helpful things
+
+`readClipboard()` will automatically turn windows paths (c:\myfile\annoyingsinglebackslashes) into escaped paths with \\ paths. 
+`r"(c:\mypath\here)"` does the same for typed string. 
+
+Obviously `tidyverse()` is useful. 
+
 ## Details
 
 `projectR::create_projectR`
