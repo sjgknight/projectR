@@ -15,15 +15,19 @@
 #' @importFrom utils install.packages
 #' @export
 create_projectR <- function(path, git = FALSE, repo = NULL, languages = c("R"), renv = FALSE) {
+  # safe path - we're going to assume the user is an idiot copy-pasting from explorer with windows paths
+
   # Create project directory
   if (git && is.null(repo)) {
     usethis::create_project(path, open = FALSE)
-    git2r::init(path)
+    git2r::init(path, "main")
   } else if (git) {
     usethis::create_from_github(path, repo)
   } else {
     usethis::create_project(path, open = FALSE)
   }
+
+
 
   # Add gitignore templates and create directories
   gitignore::gi_write_gitignore(c(
