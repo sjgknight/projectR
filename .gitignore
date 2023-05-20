@@ -1,3 +1,4 @@
+
 .Rproj.user
 .Rhistory
 .Rdata
@@ -46,3 +47,5 @@ rsconnect/
 # End of https://www.toptal.com/developers/gitignore/api/r
 
 *.ini
+
+

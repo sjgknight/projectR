@@ -22,7 +22,7 @@ create_projectR <- function(path, git = FALSE, repo = NULL, languages = c("R"), 
     usethis::create_project(path, open = FALSE)
     git2r::init(path, "main")
   } else if (git) {
-    usethis::create_from_github(path, repo)
+    usethis::create_from_github(destdir = path, repo_spec = repo)
   } else {
     usethis::create_project(path, open = FALSE)
   }
