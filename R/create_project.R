@@ -15,37 +15,48 @@
 #' @importFrom utils install.packages
 #' @export
 create_projectR <- function(path, git = FALSE, repo = NULL, languages = c("R"), renv = FALSE) {
-  # safe path - we're going to assume the user is an idiot copy-pasting from explorer with windows paths
+  # safe path - we're going to assume the user - probably me - is an idiot copy-pasting from explorer with windows paths
+
+  # Normalize the path for compatibility
+  #path <- normalizePath(path, winslash = "/", mustWork = FALSE)
+
+  # Ensure the path is not already in use
+  if (dir.exists(path)) stop("The directory already exists. Please provide a new path.")
 
   # Create project directory
   if (git && is.null(repo)) {
     usethis::create_project(path, open = FALSE)
-    git2r::init(path, "main")
+    git2r::init(path, "main", bare = FALSE)
+	message("Initialized a project with Git repository with the default branch 'main'.")
   } else if (git) {
     usethis::create_from_github(destdir = path, repo_spec = repo)
+    message("Initialized a project with git from a github repository.")
   } else {
     usethis::create_project(path, open = FALSE)
+    message("Initialized a project without git.")
   }
 
 
-
   # Add gitignore templates and create directories
-  gitignore::gi_write_gitignore(c(
-    gitignore::gi_fetch_templates(languages),
-    "*.ini"),
-    gitignore_file = paste0(path,"/.gitignore"))
+  gitignore_path <- file.path(path, ".gitignore")
+
+  gi_content <- c(gitignore::gi_fetch_templates(languages), "\n*.ini")
+
+  gitignore::gi_write_gitignore(gi_content,
+    gitignore_file = gitignore_path)
 
   # setup renv
   if (renv) {renv::init(project = path)}
+    message("Initialized renv for project.")
 
   # Create useful directory structure
-  data <- file.path(path, "data")
-  R <- file.path(path, "R")
-  output <- file.path(path, "output")
+  datadir <- file.path(path, "data")
+  Rdir <- file.path(path, "R")
+  outputdir <- file.path(path, "output")
 
-  dir.create(data)
-  dir.create(R)
-  dir.create(output)
+  dir.create(datadir)
+  dir.create(Rdir)
+  dir.create(outputdir)
 
   # Install and load pacman package
   if (!require("pacman")) {
@@ -53,19 +64,19 @@ create_projectR <- function(path, git = FALSE, repo = NULL, languages = c("R"), 
   }
 
   # Create setup.R script in R directory
-  setup_file <- file.path(R, "setup.R")
+  setup_file <- file.path(Rdir, "setup.R")
   writeLines("pacman::p_load(here)\n
               #you might want to run use_git() to initiate a git repo here\n
               usethis::use_git()\n", setup_file)
 
   # Create README file with project setup information
   readme_file <- file.path(path, "README.md")
-  readme_text <- "This is an R project created with projectR. \
+  readme_text <- "This is an R project created with projectR. \n
 
-  It includes a default directory structure, gitignore templates, and a setup.R script \
-  in the R directory. To use this script, run `source('R/setup.R')` from the project directory. \
+  It includes a default directory structure, gitignore templates, and a setup.R script \n
+  in the R directory. To use this script, run `source('R/setup.R')` from the project directory. \n
 
-  To connect to GitHub, run `usethis::use_github()` or `usethis::use_git()`. \
+  To connect to GitHub, run `usethis::use_github()` or `usethis::use_git()`. \n
 
   You should check the LICENSE file, you might want to use an opensource license such as the MIT license,
   you might find https://choosealicense.com/licenses/ or similar helpful"

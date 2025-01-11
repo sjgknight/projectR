@@ -1,7 +1,15 @@
 The following was given to chatGPT to create this package. The code needed a fair amount of editing and re-requesting (which is an interesting process in its own right).
 
 With a single function, and the `usethis::create_package()` function to create the project outline, all that's needed is the `R` code for the function, edits to description/license/readme, and calls to `usethis::use_package("")` and `devtools::check()` and `devtools::build()` to setup basic package. 
+
+Update and push changes with:
+git4r::git_pull() #check there's nothing on the remote changed first
+git4r::git_add() #add changes
+git4r::git_commit() #commit them
+git4r::git_push() #push them
+
 This is useful to know because this package is pretty dumb, but it would be very easy to modify it for whatever purposes you might want. 
+
 
 Then share with:
 
