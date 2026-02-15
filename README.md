@@ -26,7 +26,7 @@ Obviously `tidyverse()` is useful.
 
 ## Details
 
-`projectR::create_projectR`
+`projectR::create_project`
 
 Should:
 
