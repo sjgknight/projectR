@@ -10,6 +10,7 @@
 #' @param max_file_size Integer. Maximum file size in bytes to include (default: 1MB)
 #'
 #' @return Invisibly returns the output file path
+#' @export
 #' @examples
 #' \dontrun{
 #' serialize_package("path/to/mypackage")
